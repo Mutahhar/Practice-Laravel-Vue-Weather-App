@@ -20,37 +20,21 @@
         </div>
       </div> <!-- end current-weather        -->
       <div class="future-weather text-sm bg-gray-800 px-6 py-8 overflow-hidden">
-        <div class="flex items-center">
-          <div class="w-1/6 text-lg text-gray-200">Mon</div>
+        <div class="flex items-center"
+             v-for="(day, index) in daily"
+             :key="day.time"
+             :class="{'mt-8' : index > 0}"
+        >
+          <div class="w-1/6 text-lg text-gray-200">{{dayOfWeek(day.time)}}</div>
           <div class="w-4/6 px-4 flex items-center">
-            <div>icon</div>
-            <div class="ml-3">cloudy with a chance of shower</div>
+            <div>
+              <canvas :id="`icon${index+1}`" :data-icon="toKebabCase(day.icon)" width="24" height="24"></canvas>
+            </div>
+            <div class="ml-3">{{day.summary}}</div>
           </div>
           <div class="w-1/6 text-right">
-            <div>8° C</div>
-            <div>-8° C</div>
-          </div>
-        </div>
-        <div class="flex items-center mt-8">
-          <div class="w-1/6 text-lg text-gray-200">Mon</div>
-          <div class="w-4/6 px-4 flex items-center">
-            <div>icon</div>
-            <div class="ml-3">cloudy with a chance of shower</div>
-          </div>
-          <div class="w-1/6 text-right">
-            <div>8° C</div>
-            <div>-8° C</div>
-          </div>
-        </div>
-        <div class="flex items-center mt-8">
-          <div class="w-1/6 text-lg text-gray-200">Mon</div>
-          <div class="w-4/6 px-4 flex items-center">
-            <div>icon</div>
-            <div class="ml-3">cloudy with a chance of shower</div>
-          </div>
-          <div class="w-1/6 text-right">
-            <div>8° C</div>
-            <div>-8° C</div>
+            <div>{{Math.round(day.temperatureHigh)}}° C</div>
+            <div>{{Math.round(day.temperatureLow)}}° C</div>
           </div>
         </div>
       </div> <!--        end future-weather -->
@@ -71,6 +55,7 @@
           summary: '',
           icon   : '',
         },
+        daily             : [],
         location          : {
           name: 'Faisalabad, Pakistan',
           lat : '31.4504',
@@ -91,13 +76,34 @@
           this.currentTemperature.summary = data.currently.summary;
           this.currentTemperature.icon    = this.toKebabCase(data.currently.icon);
 
+          this.daily = data.daily.data;
+
           skycons.add("iconCurrent", this.currentTemperature.icon);
           skycons.play();
+
+          this.$nextTick(() => {
+            skycons.add("icon1", document.getElementById('icon1').getAttribute('data-icon'));
+            skycons.add("icon2", document.getElementById('icon2').getAttribute('data-icon'));
+            skycons.add("icon3", document.getElementById('icon3').getAttribute('data-icon'));
+            skycons.add("icon4", document.getElementById('icon4').getAttribute('data-icon'));
+            skycons.add("icon5", document.getElementById('icon5').getAttribute('data-icon'));
+            skycons.add("icon6", document.getElementById('icon6').getAttribute('data-icon'));
+            skycons.add("icon7", document.getElementById('icon7').getAttribute('data-icon'));
+            skycons.add("icon8", document.getElementById('icon8').getAttribute('data-icon'));
+
+            skycons.play();
+          });
         });
       },
       toKebabCase(string) {
         return string.split(' ').join('-');
-      }
+      },
+      dayOfWeek(timestamp) {
+        const newDate = new Date(timestamp * 1000);
+        const days    = ['SUN', 'MON', 'TUES', 'WED', 'THUR', 'FRI', 'SAT'];
+
+        return days[newDate.getDay()];
+      },
     }
   };
 </script>
