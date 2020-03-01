@@ -61,9 +61,18 @@
     mounted() {
       this.fetchData();
     },
+    data() {
+      return {
+        location: {
+          name: 'Faisalabad, Pakistan',
+          lat : '31.4504',
+          lng : '73.1350'
+        }
+      }
+    },
     methods: {
       fetchData() {
-        fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/0a16c82deaa03b44147c48198e633708/37.8267,-122.4233')
+        fetch(`/api/weather?lat=${this.location.lat}&lng=${this.location.lng}`)
         .then(response => response.json())
         .then(data => {
           console.log(data);

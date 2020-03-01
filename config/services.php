@@ -30,4 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'darksky' => [
+        'key' => env('DARKSKY_KEY', '0a16c82deaa03b44147c48198e633708')
+    ],
+
 ];

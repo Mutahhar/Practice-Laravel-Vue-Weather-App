@@ -1970,9 +1970,18 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.fetchData();
   },
+  data: function data() {
+    return {
+      location: {
+        name: 'Faisalabad, Pakistan',
+        lat: '31.4504',
+        lng: '73.1350'
+      }
+    };
+  },
   methods: {
     fetchData: function fetchData() {
-      fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/0a16c82deaa03b44147c48198e633708/37.8267,-122.4233').then(function (response) {
+      fetch("/api/weather?lat=".concat(this.location.lat, "&lng=").concat(this.location.lng)).then(function (response) {
         return response.json();
       }).then(function (data) {
         console.log(data);
