@@ -1968,7 +1968,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.fetchData();
+  },
+  methods: {
+    fetchData: function fetchData() {
+      fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/0a16c82deaa03b44147c48198e633708/37.8267,-122.4233').then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        console.log(data);
+      });
+    }
   }
 });
 

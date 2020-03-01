@@ -59,7 +59,16 @@
 <script>
   export default {
     mounted() {
-      console.log('Component mounted.');
+      this.fetchData();
+    },
+    methods: {
+      fetchData() {
+        fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/0a16c82deaa03b44147c48198e633708/37.8267,-122.4233')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        });
+      }
     }
   };
 </script>
