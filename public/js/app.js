@@ -1916,6 +1916,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37304,7 +37320,45 @@ var staticRenderFns = [
     return _c("div", { staticClass: "text-white mb-8" }, [
       _c("div", { staticClass: "places-input text-gray-800" }, [
         _c("input", { staticClass: "w-full", attrs: { type: "text" } })
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "weather-container font-sans w-128 max-w-lg rounded-lg overflow-hidden bg-gray-900 shadow-lg mt-4"
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "current-weather flex items-center justify-between px-6 py-8"
+            },
+            [
+              _c("div", { staticClass: "flex items-center" }, [
+                _c("div", [
+                  _c("div", { staticClass: "text-6xl font-semibold" }, [
+                    _vm._v("8° C")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [_vm._v("Feels like 2° C")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mx-5" }, [
+                  _c("div", { staticClass: "font-semibold" }, [
+                    _vm._v("Cloudy")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [_vm._v("Faisalabad, Pakistan")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", [_vm._v("icon ")])
+            ]
+          )
+        ]
+      )
     ])
   }
 ]
