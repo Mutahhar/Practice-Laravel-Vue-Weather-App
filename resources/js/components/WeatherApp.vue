@@ -1,7 +1,8 @@
 <template>
   <div class="text-white mb-8">
     <div class="places-input text-gray-800">
-      <input type="text" class="w-full">
+      <input type="search" id="city" class="w-full form-control" placeholder="In which city do you live?" />
+      <p>Selected: <strong id="address-value">none</strong></p>
     </div>
     <div class="weather-container font-sans w-128 max-w-lg rounded-lg overflow-hidden bg-gray-900 shadow-lg mt-4">
       <div class="current-weather flex items-center justify-between px-6 py-8">
@@ -46,6 +47,45 @@
   export default {
     mounted() {
       this.fetchData();
+
+      var placesAutocomplete = places(
+        {
+          appId    : 'pl4O9Q2C1H4M',
+          apiKey   : 'f09064d6d31df2cb106684a0f4f3cf21',
+          container: document.querySelector('#city'),
+          templates: {
+            value: function (suggestion) {
+              return suggestion.name;
+            }
+          }
+        }).configure(
+        {
+          type             : 'city',
+          aroundLatLngViaIP: false,
+        }
+      );
+
+      var $address = document.querySelector('#address-value');
+      placesAutocomplete.on('change', (e) => {
+        $address.textContent = e.suggestion.value;
+
+        this.location.name = `${e.suggestion.name}, ${e.suggestion.country}`;
+        this.location.lat  = e.suggestion.latlng.lat;
+        this.location.lng  = e.suggestion.latlng.lng;
+      });
+
+      placesAutocomplete.on('clear', function () {
+        $address.textContent = 'none';
+      });
+
+    },
+    watch  : {
+      location: {
+        handler(newValue, oldValue) {
+          this.fetchData();
+        },
+        deep: true
+      }
     },
     data() {
       return {
