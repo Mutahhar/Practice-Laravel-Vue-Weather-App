@@ -5,6 +5,7 @@
     <title>Laravel/Vue Weather app</title>
 
     <link rel="stylesheet" href="/css/main.css">
+    <script src="https://gitcdn.link/cdn/darkskyapp/skycons/master/skycons.js"></script>
     <script src="/js/app.js" defer></script>
 </head>
 <body class="bg-blue-200">
